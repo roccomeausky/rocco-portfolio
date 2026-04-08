@@ -157,7 +157,7 @@ export default function Home() {
       {/* Footer & Contact */}
       <footer id="contact" className="bg-black text-white py-24 mt-12">
         <div className="max-w-3xl mx-auto px-8 text-center">
-          <h3 className="text-4xl font-bold tracking-tighter mb-6">Let's build something.</h3>
+          <h3 className="text-4xl font-bold tracking-tighter mb-6">Let&apos;s build something.</h3>
           <p className="text-gray-400 mb-10">Currently seeking 2026 hardware and embedded internships.</p>
           <div className="flex flex-col items-center justify-center space-y-6">
             <a href="mailto:your.email@bu.edu" className="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors">
