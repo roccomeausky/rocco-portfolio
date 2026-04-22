@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { doc, setDoc, onSnapshot, increment } from "firebase/firestore";
 import { db } from "../firebase";
+import { projects } from "../lib/projects";
 
 export default function Home() {
   const [views, setViews] = useState(0);
@@ -36,142 +38,236 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] text-gray-900 font-sans selection:bg-blue-200">
-      
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-8 max-w-5xl mx-auto">
-        <h1 className="text-xl font-semibold tracking-tighter">Rocco Meausky</h1>
-        <div className="space-x-6 text-sm font-medium text-gray-500">
-          <a href="#projects" className="hover:text-black transition-colors">Projects</a>
-          <a href="#contact" className="hover:text-black transition-colors">Contact</a>
+    <div className="min-h-screen bg-[#0a0a0f] text-[#e4e4e7]">
+
+      {/* ── Fixed background layers ── */}
+      <div className="fixed inset-0 dot-grid pointer-events-none z-0" />
+      <div
+        className="fixed top-0 left-0 right-0 h-[700px] pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, rgba(0, 229, 255, 0.05) 0%, transparent 60%)',
+        }}
+      />
+
+      {/* ── Navigation ── */}
+      <nav className="relative z-10 flex justify-between items-center p-6 md:p-8 max-w-6xl mx-auto">
+        <div className="font-mono text-sm">
+          <span className="text-[#00e5ff]">rocco</span>
+          <span className="text-[#71717a]">@bu.edu</span>
+          <span className="text-[#00e5ff]">:~$</span>
+        </div>
+        <div className="space-x-6 text-sm font-mono text-[#71717a]">
+          <a
+            href="#projects"
+            className="hover:text-[#00e5ff] transition-colors duration-300"
+          >
+            projects
+          </a>
+          <a
+            href="#contact"
+            className="hover:text-[#00e5ff] transition-colors duration-300"
+          >
+            contact
+          </a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="max-w-5xl mx-auto px-8 py-24 md:py-32">
-        <div className="inline-flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-gray-600 mb-6">
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-          <span>Open to 2026 Internships</span>
+      {/* ── Hero Section ── */}
+      <header className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-24 md:py-36">
+        <div className="animate-fade-in-up">
+          <div className="inline-flex items-center space-x-2 border border-[#00e5ff33] bg-[#00e5ff08] px-4 py-1.5 rounded-full text-xs font-mono text-[#00e5ff] mb-8">
+            <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse" />
+            <span>Open to 2026 Internships</span>
+          </div>
         </div>
-        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight mb-6">
-          I build <span className="text-gray-400">autonomous robots</span> <br/>
-          and <span className="text-gray-400">embedded systems.</span>
+
+        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight mb-6 animate-fade-in-up animation-delay-100">
+          Embedded systems{' '}
+          <br />
+          <span className="text-[#00e5ff]">& autonomous machines.</span>
+          <span className="typing-cursor" />
         </h2>
-        <p className="text-lg text-gray-500 max-w-2xl leading-relaxed mb-10">
-          First-year Electrical Engineering student at Boston University. 
-          Specializing in hardware-software integration, computer vision, and physical computing.
+
+        <p className="text-lg text-[#71717a] max-w-2xl leading-relaxed mb-10 animate-fade-in-up animation-delay-200">
+          First-year Electrical Engineering student at Boston University.
+          Specializing in hardware-software integration, computer vision, and
+          physical computing.
         </p>
-        <a href="#projects" className="bg-black text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition-all">
-          View My Work ↓
-        </a>
+
+        <div className="animate-fade-in-up animation-delay-300">
+          <a
+            href="#projects"
+            className="inline-flex items-center border border-[#00e5ff] text-[#00e5ff] px-8 py-4 rounded-full font-mono text-sm hover:bg-[#00e5ff] hover:text-[#0a0a0f] transition-all duration-300"
+          >
+            View My Work ↓
+          </a>
+        </div>
       </header>
 
-      {/* Projects Section */}
-      <section id="projects" className="max-w-5xl mx-auto px-8 py-16">
-        <h3 className="text-2xl font-bold tracking-tight mb-12 border-b pb-4">Selected Hardware</h3>
+      {/* ── Projects Section ── */}
+      <section
+        id="projects"
+        className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-16"
+      >
+        {/* Section header */}
+        <div className="flex items-center space-x-3 mb-16">
+          <span className="text-xs font-mono text-[#00e5ff]">//</span>
+          <h3 className="text-sm font-mono text-[#71717a] tracking-widest uppercase">
+            Selected Hardware
+          </h3>
+          <div className="flex-1 h-px bg-[#1e1e2a]" />
+        </div>
 
-        <div className="space-y-24">
-          
-          {/* Project 1: AKKA */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="aspect-video bg-gray-200 rounded-2xl flex items-center justify-center text-gray-400 overflow-hidden shadow-sm">
-              <img src="/akka.jpg" alt="Project AKKA" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h4 className="text-3xl font-bold tracking-tight mb-3">Project AKKA</h4>
-              <p className="text-gray-500 mb-6 leading-relaxed">
-                A 6-DOF autonomous robotic arm powered by an NVIDIA Jetson Orin Nano. Engineered the power distribution system (handling up to 20A) using buck converters and terminal blocks. Programmed an Arduino via I2C to translate spatial AI coordinates into deterministic PWM signals for a 16-channel servo driver. Custom-designed and 3D-printed an active-cooled electronics enclosure.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {['NVIDIA Jetson', 'Arduino', 'I2C', 'CAD', 'Power Distribution'].map((tech) => (
-                  <span key={tech} className="px-3 py-1 bg-gray-100 text-xs font-semibold rounded-md text-gray-600">{tech}</span>
-                ))}
+        <div className="space-y-12">
+          {projects.map((project, index) => (
+            <Link
+              key={project.slug}
+              href={`/projects/${project.slug}`}
+              className="block group card-glow bg-[#111118] border border-[#1e1e2a] rounded-2xl overflow-hidden hover:border-[#00e5ff33] transition-all duration-500"
+            >
+              {/* Status bar */}
+              <div className="flex items-center justify-between px-6 py-3 border-b border-[#1e1e2a]">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-[#00e5ff]" />
+                  <span className="text-xs font-mono text-[#71717a]">
+                    {project.status}
+                  </span>
+                </div>
+                <span className="text-xs font-mono text-[#71717a]">
+                  PROJECT_{project.number}
+                </span>
               </div>
-              <button onClick={() => handleUpvote('akka')} className="flex items-center space-x-2 text-sm font-semibold text-gray-500 hover:text-black transition-colors">
-                <span>▲ Upvote Project</span>
-                <span className="bg-gray-100 text-black px-2 py-1 rounded-md">{upvotes.akka || 0}</span>
-              </button>
-            </div>
-          </div>
 
-          {/* Project 2: Nerf Turret */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <h4 className="text-3xl font-bold tracking-tight mb-3">Autonomous Targeting Turret</h4>
-              <p className="text-gray-500 mb-6 leading-relaxed">
-                An autonomous computer-vision turret powered by a Raspberry Pi Zero W2. Implemented YOLOv8n to identify and track specific targets while executing a strict human-detection safety lock. Integrated DC motors with encoders and limit switches for precise pan/tilt collision avoidance, alongside a servo-actuated firing mechanism.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {['Raspberry Pi', 'YOLOv8n Vision', 'Encoders', 'Servos/DC Motors', 'Python'].map((tech) => (
-                  <span key={tech} className="px-3 py-1 bg-gray-100 text-xs font-semibold rounded-md text-gray-600">{tech}</span>
-                ))}
+              {/* Content grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                {/* Image panel */}
+                <div
+                  className={`overflow-hidden ${
+                    index % 2 === 1 ? 'md:order-2' : ''
+                  }`}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.alt}
+                    className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+
+                {/* Details panel */}
+                <div
+                  className={`p-6 md:p-8 flex flex-col justify-center ${
+                    index % 2 === 1 ? 'md:order-1' : ''
+                  }`}
+                >
+                  <h4 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">
+                    {project.title}
+                  </h4>
+                  <p className="text-[#71717a] mb-6 leading-relaxed text-sm">
+                    {project.description}
+                  </p>
+
+                  {/* Tech badges */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-3 py-1 border border-[#1e1e2a] text-xs font-mono text-[#00e5ff] rounded group-hover:border-[#00e5ff33] transition-colors"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Upvote + View Details */}
+                  <div className="flex items-center justify-between">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleUpvote(project.slug);
+                      }}
+                      className="flex items-center space-x-3 font-mono text-sm text-[#71717a] hover:text-[#00e5ff] transition-colors duration-300 w-fit cursor-pointer"
+                    >
+                      <span>$ upvote --project {project.slug}</span>
+                      <span className="bg-[#00e5ff08] text-[#00e5ff] border border-[#00e5ff33] px-2.5 py-1 rounded text-xs">
+                        {upvotes[project.slug] || 0}
+                      </span>
+                    </button>
+                    <span className="text-xs font-mono text-[#71717a] group-hover:text-[#00e5ff] transition-colors duration-300 hidden md:inline">
+                      View Details →
+                    </span>
+                  </div>
+                </div>
               </div>
-              <button onClick={() => handleUpvote('turret')} className="flex items-center space-x-2 text-sm font-semibold text-gray-500 hover:text-black transition-colors">
-                <span>▲ Upvote Project</span>
-                <span className="bg-gray-100 text-black px-2 py-1 rounded-md">{upvotes.turret || 0}</span>
-              </button>
-            </div>
-            <div className="aspect-video bg-gray-200 rounded-2xl flex items-center justify-center text-gray-400 order-1 md:order-2 overflow-hidden shadow-sm">
-              <img src="/turret.jpg" alt="Autonomous Turret" className="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          {/* Project 3: Battle Bot */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="aspect-video bg-gray-200 rounded-2xl flex items-center justify-center text-gray-400 overflow-hidden shadow-sm">
-              <img src="/andy.jpg" alt="Battle Bot" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h4 className="text-3xl font-bold tracking-tight mb-3">Tournament Battle Bot</h4>
-              <p className="text-gray-500 mb-6 leading-relaxed">
-                Head Electrical Engineer for a tournament-winning combat robot. Designed the electronic control system, including motor drivers, power regulation, and signal routing. Programmed dual ESP32 microcontrollers in C++ to interpret Bluetooth inputs and operate wheel and lift motors in real-time.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {['ESP32', 'C++', 'Bluetooth', 'Motor Drivers', 'Wiring'].map((tech) => (
-                  <span key={tech} className="px-3 py-1 bg-gray-100 text-xs font-semibold rounded-md text-gray-600">{tech}</span>
-                ))}
-              </div>
-              <button onClick={() => handleUpvote('battlebot')} className="flex items-center space-x-2 text-sm font-semibold text-gray-500 hover:text-black transition-colors">
-                <span>▲ Upvote Project</span>
-                <span className="bg-gray-100 text-black px-2 py-1 rounded-md">{upvotes.battlebot || 0}</span>
-              </button>
-            </div>
-          </div>
-
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Mars Rover (Text Only Card) */}
-      <section className="max-w-5xl mx-auto px-8 py-12">
-        <div className="bg-gray-50 border border-gray-100 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div>
-            <h4 className="text-xl font-bold tracking-tight mb-2">BU Mars Rover Team</h4>
-            <p className="text-gray-500 text-sm max-w-2xl">
-              Electrical Subteam. Designed motor controller PCB layouts using Altium Designer, focusing on signal integrity, correct component placement, and reliable trace routing ahead of competition deadlines.
-            </p>
+      {/* ── Mars Rover Card ── */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-12">
+        <div className="card-glow bg-[#111118] border border-[#1e1e2a] rounded-2xl overflow-hidden hover:border-[#00e5ff33] transition-all duration-500">
+          {/* Status bar */}
+          <div className="flex items-center justify-between px-6 py-3 border-b border-[#1e1e2a]">
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse" />
+              <span className="text-xs font-mono text-[#71717a]">
+                IN PROGRESS
+              </span>
+            </div>
+            <span className="text-xs font-mono text-[#71717a]">
+              PROJECT_04
+            </span>
           </div>
-          <span className="px-4 py-2 bg-black text-white text-xs font-bold rounded-full shrink-0">Altium Designer</span>
+
+          <div className="p-6 md:p-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+              <h4 className="text-xl font-bold tracking-tight mb-2">
+                BU Mars Rover Team
+              </h4>
+              <p className="text-[#71717a] text-sm max-w-2xl">
+                Electrical Subteam. Designed motor controller PCB layouts using
+                Altium Designer, focusing on signal integrity, correct component
+                placement, and reliable trace routing ahead of competition
+                deadlines.
+              </p>
+            </div>
+            <span className="px-4 py-2 border border-[#00e5ff] text-[#00e5ff] text-xs font-mono rounded-full shrink-0">
+              Altium Designer
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Footer & Contact */}
-      <footer id="contact" className="bg-black text-white py-24 mt-12">
-        <div className="max-w-3xl mx-auto px-8 text-center">
-          <h3 className="text-4xl font-bold tracking-tighter mb-6">Let&apos;s build something.</h3>
-          <p className="text-gray-400 mb-10">Currently seeking 2026 hardware and embedded internships.</p>
-          <div className="flex flex-col items-center justify-center space-y-6">
-            <a href="mailto:your.email@bu.edu" className="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors">
+      {/* ── Footer & Contact ── */}
+      <footer
+        id="contact"
+        className="relative z-10 border-t border-[#1e1e2a] py-24 mt-12"
+      >
+        <div className="max-w-3xl mx-auto px-6 md:px-8 text-center">
+          <h3 className="text-4xl font-bold tracking-tighter mb-6">
+            Let&apos;s build something.
+          </h3>
+          <p className="text-[#71717a] mb-10 font-mono text-sm">
+            Currently seeking 2026 hardware and embedded internships.
+          </p>
+          <div className="flex flex-col items-center justify-center space-y-8">
+            <a
+              href="mailto:your.email@bu.edu"
+              className="inline-flex items-center border border-[#00e5ff] text-[#00e5ff] px-8 py-3 rounded-full font-mono text-sm hover:bg-[#00e5ff] hover:text-[#0a0a0f] transition-all duration-300"
+            >
               Email Me
             </a>
-            
-            {/* The Silent View Counter! */}
-            <p className="text-xs text-gray-600 font-mono mt-12">
-              Total Site Views: {views || 0}
+
+            {/* The View Counter as system log */}
+            <p className="text-xs text-[#71717a] font-mono mt-12">
+              <span className="text-[#00e5ff]">&gt;</span>{' '}
+              system.connections.total: {views || 0}
             </p>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
