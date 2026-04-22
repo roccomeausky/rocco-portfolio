@@ -107,7 +107,7 @@ export default function ProjectPage() {
       <section className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 pb-16">
         <div className="rounded-2xl overflow-hidden border border-[#1e1e2a]">
           <img
-            src={project.image}
+            src={project.heroImage || project.image}
             alt={project.alt}
             className="w-full aspect-video object-cover"
           />
