@@ -95,12 +95,20 @@ export default function Home() {
           physical computing.
         </p>
 
-        <div className="animate-fade-in-up animation-delay-300">
+        <div className="animate-fade-in-up animation-delay-300 flex flex-wrap gap-4">
           <a
             href="#projects"
             className="inline-flex items-center border border-[#00e5ff] text-[#00e5ff] px-8 py-4 rounded-full font-mono text-sm hover:bg-[#00e5ff] hover:text-[#0a0a0f] transition-all duration-300"
           >
             View My Work ↓
+          </a>
+          <a
+            href="/RESUME.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center border border-[#1e1e2a] bg-[#111118] text-[#e4e4e7] px-8 py-4 rounded-full font-mono text-sm hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all duration-300"
+          >
+            Resume.pdf ↗
           </a>
         </div>
       </header>
@@ -240,6 +248,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Skills Terminal ── */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-12">
+        <div className="border border-[#1e1e2a] bg-[#111118] rounded-2xl p-6 md:p-8 shrink-0 font-mono text-sm hover:border-[#00e5ff33] transition-all duration-500 card-glow">
+          <div className="flex items-center space-x-2 mb-6">
+            <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+            <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+            <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+          </div>
+          <div className="space-y-3 pl-2 max-w-full overflow-x-auto text-[#a1a1aa] leading-relaxed">
+            <p><span className="text-[#00e5ff]">rocco@system</span><span className="text-[#e4e4e7]">:~$</span> cat skills.json</p>
+            <p className="text-[#e4e4e7]">{'{'}</p>
+            <p className="pl-4 sm:pl-8">"hardware": ["PCB Design", "Altium Designer", "Soldering", "Circuit Analysis"],</p>
+            <p className="pl-4 sm:pl-8">"software": ["C/C++", "Python", "JavaScript", "React/Next.js"],</p>
+            <p className="pl-4 sm:pl-8">"systems":  ["Microcontrollers", "RTOS", "Linux", "I2C/SPI/UART", "Robotics"]</p>
+            <p className="text-[#e4e4e7]">{'}'}</p>
+            <p className="mt-4"><span className="text-[#00e5ff]">rocco@system</span><span className="text-[#e4e4e7]">:~$</span> <span className="typing-cursor" /></p>
+          </div>
+        </div>
+      </section>
+
       {/* ── Footer & Contact ── */}
       <footer
         id="contact"
@@ -252,16 +280,34 @@ export default function Home() {
           <p className="text-[#71717a] mb-10 font-mono text-sm">
             Currently seeking 2026 hardware and embedded internships.
           </p>
-          <div className="flex flex-col items-center justify-center space-y-8">
+          
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="mailto:your.email@bu.edu"
               className="inline-flex items-center border border-[#00e5ff] text-[#00e5ff] px-8 py-3 rounded-full font-mono text-sm hover:bg-[#00e5ff] hover:text-[#0a0a0f] transition-all duration-300"
             >
               Email Me
             </a>
+            <a
+              href="https://github.com/roccomeausky"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center border border-[#1e1e2a] bg-[#111118] text-[#e4e4e7] px-8 py-3 rounded-full font-mono text-sm hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all duration-300"
+            >
+              GitHub ↗
+            </a>
+            <a
+              href="https://linkedin.com/in/roccomeausky"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center border border-[#1e1e2a] bg-[#111118] text-[#e4e4e7] px-8 py-3 rounded-full font-mono text-sm hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all duration-300"
+            >
+              LinkedIn ↗
+            </a>
+          </div>
 
-            {/* The View Counter as system log */}
-            <p className="text-xs text-[#71717a] font-mono mt-12">
+          {/* The View Counter as system log */}
+          <p className="text-xs text-[#71717a] font-mono mt-12">
               <span className="text-[#00e5ff]">&gt;</span>{' '}
               system.connections.total: {views || 0}
             </p>
