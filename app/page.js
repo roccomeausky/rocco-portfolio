@@ -311,7 +311,6 @@ export default function Home() {
               <span className="text-[#00e5ff]">&gt;</span>{' '}
               system.connections.total: {views || 0}
             </p>
-          </div>
         </div>
       </footer>
     </div>
