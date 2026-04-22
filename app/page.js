@@ -297,7 +297,7 @@ export default function Home() {
               GitHub ↗
             </a>
             <a
-              href="https://linkedin.com/in/roccomeausky"
+              href="https://www.linkedin.com/in/rocco-meausky/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center border border-[#1e1e2a] bg-[#111118] text-[#e4e4e7] px-8 py-3 rounded-full font-mono text-sm hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all duration-300"
