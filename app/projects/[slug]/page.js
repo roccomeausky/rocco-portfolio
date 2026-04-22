@@ -194,25 +194,31 @@ export default function ProjectPage() {
           <div className="flex-1 h-px bg-[#1e1e2a]" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-4">
           {project.gallery.map((item, i) => (
             <div
               key={i}
-              className="rounded-xl overflow-hidden border border-[#1e1e2a] group"
+              className={`rounded-xl overflow-hidden border border-[#1e1e2a] group ${
+                item.type === 'image' ? 'inline-block w-full md:w-[calc(50%-0.5rem)]' : 'w-full'
+              }`}
+              style={item.type === 'image' ? { marginRight: i % 2 === 0 ? '0.5rem' : '0' } : {}}
             >
-              {item.type === "image" ? (
+              {item.type === 'image' ? (
                 <img
                   src={item.src}
                   alt={item.alt}
                   className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               ) : (
-                <iframe
+                <video
                   src={item.src}
-                  title={item.caption}
-                  className="w-full aspect-video"
-                  allowFullScreen
-                />
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full aspect-video bg-black"
+                >
+                  Your browser does not support the video tag.
+                </video>
               )}
               {item.caption && (
                 <div className="px-4 py-3 bg-[#111118]">
